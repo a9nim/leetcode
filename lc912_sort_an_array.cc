@@ -10,7 +10,7 @@ public:
         if (begin + 1 >= end) {
             return;
         } 
-        int pivot = nums[begin];
+        int pivot = nums[begin + rand() % (end - begin)];
         int left = begin;
         int right = end - 1;
         while (left <= right) {
@@ -25,7 +25,7 @@ public:
             }
             std::swap(nums[left++], nums[right--]);
         }
-        quickSort(begin, left, nums);
+        quickSort(begin, right + 1, nums);
         quickSort(left, end, nums);
         return;
     }
