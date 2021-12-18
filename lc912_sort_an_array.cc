@@ -8,7 +8,19 @@ public:
     
     void quickSort(int begin, int end, vector<int>& nums) {
         if (begin + 1 >= end) {
-            return;
+            return; 
+        }
+        std::pair<int, int> left_right = partition(begin, end, nums);
+        int left = left_right.first;
+        int right = left_right.second;
+        quickSort(begin, right + 1, nums);
+        quickSort(left, end, nums);
+        return;
+    }
+    
+    std::pair<int, int> partition(int begin, int end, vector<int>& nums) {
+        if (begin + 1 >= end) {
+            return std::make_pair(end, begin);
         } 
         int pivot = nums[begin + rand() % (end - begin)];
         int left = begin;
@@ -25,9 +37,7 @@ public:
             }
             std::swap(nums[left++], nums[right--]);
         }
-        quickSort(begin, right + 1, nums);
-        quickSort(left, end, nums);
-        return;
+        return std::make_pair(left, right);
     }
 };
 
